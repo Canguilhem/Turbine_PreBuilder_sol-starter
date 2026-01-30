@@ -2,6 +2,7 @@
   "name": "turbin3-solana",
   "version": "1.0.0",
   "license": "MIT",
+  "packageManager": "yarn@3.6.4",
   "scripts": {
     "airdrop_to_wallet": "ts-node ./tools/airdrop_to_wallet.ts",
     "base58_to_wallet": "ts-node ./tools/base58_to_wallet.ts",
