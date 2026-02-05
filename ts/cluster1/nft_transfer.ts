@@ -5,14 +5,18 @@ import {
   generateSigner,
   percentAmount,
   publicKey,
+  Commitment,
 } from "@metaplex-foundation/umi";
 import {
   createNft,
   mplTokenMetadata,
+  transferV1,
 } from "@metaplex-foundation/mpl-token-metadata";
 
 import wallet from "./wallet/dev_wallet.json";
 import base58 from "bs58";
+import { getOrCreateAssociatedTokenAccount } from "@solana/spl-token";
+import { Connection } from "@solana/web3.js";
 
 const RPC_ENDPOINT = "https://api.devnet.solana.com";
 const umi = createUmi(RPC_ENDPOINT);
@@ -22,27 +26,14 @@ const myKeypairSigner = createSignerFromKeypair(umi, keypair);
 umi.use(signerIdentity(myKeypairSigner));
 umi.use(mplTokenMetadata());
 
-// we need a pda to allow anyone to actually mint nfts
-const mint = generateSigner(umi);
+// using token address
+const tokenAddr = publicKey("Cd6q9DJnbD71FCbAHrC6iXbSBwWGDWqcmf2GtcwwLzZC");
 
 (async () => {
-  let tx = createNft(umi, {
-    mint,
-    name: "Vintage Rug 2",
-    uri: "https://gateway.irys.xyz/33Tg4hTxPGEzUTxZbAXxFY35dWbJFNLJCDDTTTEVW5qY", // actual json uri
-    sellerFeeBasisPoints: percentAmount(10),
-    creators: [
-      {
-        address: keypair.publicKey,
-        share: 60,
-        verified: true,
-      },
-      {
-        address: publicKey("9yq8BgSG7XahLBKivhTiHKbrhXfHTA8Yk4xixgyg8yyd"),
-        share: 40,
-        verified: false, // throws if set to true: CannotVerifyAnotherCreator: You cannot unilaterally verify another creator, they must sign
-      },
-    ],
+  let tx = transferV1(umi, {
+    destinationOwner: publicKey("79sRbD72j88pPvsdTy6k3KXgpbX7wfFNSPEy9GkxstJv"),
+    mint: tokenAddr,
+    tokenStandard: 0, // NonFungible
   });
   let result = await tx.sendAndConfirm(umi);
   const signature = base58.encode(result.signature);
@@ -50,6 +41,4 @@ const mint = generateSigner(umi);
   console.log(
     `Succesfully Minted! Check out your TX here:\nhttps://explorer.solana.com/tx/${signature}?cluster=devnet`
   );
-
-  console.log("Mint Address: ", mint.publicKey);
 })();

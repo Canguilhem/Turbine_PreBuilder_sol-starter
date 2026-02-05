@@ -18,6 +18,8 @@
     "nft_image": "ts-node ./cluster1/nft_image.ts",
     "nft_metadata": "ts-node ./cluster1/nft_metadata.ts",
     "nft_mint": "ts-node ./cluster1/nft_mint.ts",
+    "nft_update": "ts-node ./cluster1/nft_update.ts",
+    "nft_transfer": "ts-node ./cluster1/nft_transfer.ts",
     "vault_init": "ts-node ./cluster1/vault_init.ts",
     "vault_deposit": "ts-node ./cluster1/vault_deposit.ts",
     "vault_withdraw": "ts-node ./cluster1/vault_withdraw.ts",
