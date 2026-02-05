@@ -37,3 +37,9 @@ mint address: https://explorer.solana.com/address/7rXNf3V8VNUPh48LXpXWSv1sCRJkQv
 ## NFT metadata Update
 
 tx: https://explorer.solana.com/tx/4t8wnE53QErzzxDRhFatSAxKB354Xc1HmVQJpV2VhhvbWGj66ZqaafqsU4YjBSSPPcGczjtRKZmppYcCYZP61E8H?cluster=devnet
+
+## Transfer NFT
+
+token transfered:
+tx: https://explorer.solana.com/tx/59AokNngwT8fUzDc7vzEqJb4citcAWDnphGT9sndqmG3nADwY8fVH7yuHSeeonNKriiGTc8vF8AXfTR5BQJ1n7DM?cluster=devnet
+recipient pubk: 79sRbD72j88pPvsdTy6k3KXgpbX7wfFNSPEy9GkxstJv
